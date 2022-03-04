@@ -1,3 +1,5 @@
+🔥 Warning: this repo contains experimental open source implementations.
+
 ### Related Work
 
 - [did-key.js](https://github.com/transmute-industries/did-key.js)
