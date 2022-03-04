@@ -1,3 +1,8 @@
-## This repo has moved to the W3C CCG
+🔥 Warning: this repo contains experimental open source implementations.
 
-See [W3C CCG Universal Wallet Interop Spec](https://github.com/w3c-ccg/universal-wallet-interop-spec)
+### Related Work
+
+- [did-key.js](https://github.com/transmute-industries/did-key.js)
+- [sidetree.js](https://github.com/transmute-industries/sidetree.js)
+- [verifiable-data](https://github.com/transmute-industries/verifiable-data)
+- [did actor api](https://github.com/transmute-industries/api.did.actor)
