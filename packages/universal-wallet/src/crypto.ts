@@ -8,9 +8,16 @@ function isNodejs() {
   );
 }
 
+function isReactNative() {
+  return (
+    typeof navigator !== 'undefined' && 
+    navigator.product === 'ReactNative'
+  );
+}
+
 let crypto: Crypto;
 
-if (isNodejs()) {
+if (isNodejs() || isReactNative()) {
   crypto = new Crypto();
 } else {
   crypto = window.crypto;

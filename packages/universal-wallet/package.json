@@ -51,6 +51,7 @@
     "typescript": "^4.1.3"
   },
   "dependencies": {
+    "@digitalcredentials/minimal-cipher": "github:digitalcredentials/minimal-cipher",
     "@peculiar/webcrypto": "^1.1.4",
     "@transmute/jose-ld": "^0.7.0-unstable.51",
     "@transmute/universal-wallet-test-vectors": "^0.7.0-unstable.51",

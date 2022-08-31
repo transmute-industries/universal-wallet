@@ -1,7 +1,11 @@
 import { passwordToKey } from "./passwordToKey";
 
 import { X25519KeyPair } from "@transmute/x25519-key-pair";
-import { JWE } from "@transmute/jose-ld";
+import { X25519KeyAgreementKey2020 }
+  from '@digitalcredentials/x25519-key-agreement-key-2020';
+
+//import { JWE } from "@transmute/jose-ld";
+import { Cipher } from '@digitalcredentials/minimal-cipher';
 
 export const lockContents = async (
   password: string,
@@ -14,26 +18,39 @@ export const lockContents = async (
       return derivedKey;
     }
   });
-  kp.id = kp.controller + kp.id;
+  console.log('key:');
+  const key = await kp.export({
+    type: "X25519KeyAgreementKey2019",
+    privateKey: false
+  });
+  console.log(key);
+
+  const kak = await X25519KeyAgreementKey2020.fromX25519KeyAgreementKey2019(key);
+  console.log('kak:');
+  console.log(kak);
+
   const recipient = {
     header: {
-      kid: kp.id,
+      kid: kak.id,
       alg: "ECDH-ES+A256KW"
     }
   };
+
+  console.log('recipient:');
+  console.log(recipient);
+
   const recipients = [recipient];
 
-  const keyResolver = (id: string) => {
-    if (kp.id === id) {
-      return kp.export({
-        type: "JsonWebKey2020",
-        privateKey: false
-      });
+  const keyResolver = async (searchKey) => {
+    console.log('keyResolver');
+    console.log(searchKey);
+    if (kak.id === searchKey.id) {
+      return kak;
     }
     throw new Error(`Key ${id} not found`);
   };
 
-  const cipher = new JWE.Cipher();
+  const cipher = new Cipher({version: "fips"});
 
   const encryptedContents = await Promise.all(
     contents.map(async content => {
@@ -41,7 +58,7 @@ export const lockContents = async (
       const jwe = await cipher.encryptObject({
         obj: { ...content },
         recipients: [...recipients],
-        publicKeyResolver: keyResolver
+        keyResolver: keyResolver
       });
       return jwe;
     })
