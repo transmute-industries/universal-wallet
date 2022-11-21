@@ -75,7 +75,7 @@
     "@transmute/universal-wallet-vp-exchange-plugin": "0.7.0-unstable.2",
     "axios": "^0.21.1",
     "factory.ts": "^0.5.1",
-    "fastify": "^3.14.0",
+    "fastify": "^3.29.4",
     "fastify-plugin": "^3.0.0"
   }
 }
