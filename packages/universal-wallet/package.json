@@ -42,7 +42,7 @@
     }
   ],
   "devDependencies": {
-    "@size-limit/preset-small-lib": "^4.9.1",
+    "@size-limit/preset-small-lib": "^8.1.0",
     "@transmute/did-context": "^0.7.0-unstable.51",
     "size-limit": "^4.9.1",
     "ts-jest": "^27.1.3",
